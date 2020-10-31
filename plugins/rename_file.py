@@ -43,13 +43,10 @@ async def rename_doc(bot, update):
     if (" " in update.text) and (update.reply_to_message is not None):
         cmd, file_name = update.text.split(" ", 1)
         if len(file_name) > 64:
-            await update.reply_text(
-                Translation.IFLONG_FILE_NAME.format(
-                    alimit="64",
-                    num=len(file_name)
-                )
-            )
-            return
+            ne_x = file_name[:60]+file_name[-4:]
+            file_name = ne_x
+        else:
+            pass
         description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
